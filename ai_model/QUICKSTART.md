@@ -30,6 +30,9 @@ python examples/basic_classification.py
 
 # Advanced PyTorch features
 python examples/pytorch_advanced.py
+
+# 🎨 NEW: Image Generation Demo
+python examples/image_generation_demo.py
 ```
 
 ## 💡 Simple Usage Examples
@@ -66,6 +69,29 @@ X_processed, y_processed = processor.preprocess_data(X, y)
 
 print(f"Dataset: {X.shape[0]} samples, {X.shape[1]} features")
 print(f"Features: {feature_names}")
+```
+
+### 🎨 Generate Images (NEW!)
+```python
+from models.generative_models import SimpleImageGenerator, NoiseToImageGenerator
+
+# Simple pattern generator
+generator = SimpleImageGenerator(image_size=(128, 128))
+
+# Generate different types of images
+circle_image = generator.generate_random_pattern("circles")
+emoji_image = generator.generate_face_emoji()
+
+# Generate from noise
+noise_gen = NoiseToImageGenerator(image_size=(128, 128))
+noise_image = noise_gen.generate_from_noise()
+wood_texture = noise_gen.generate_texture("wood")
+
+# Save the images
+from models.generative_models import ImageGenerationUtils
+utils = ImageGenerationUtils()
+utils.save_image(circle_image, "my_circles.png")
+utils.save_image(emoji_image, "my_emoji.png")
 ```
 
 ### PyTorch Neural Network
